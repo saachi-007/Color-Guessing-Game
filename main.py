@@ -13,11 +13,20 @@ def play_game():
 
     score = 0
 
+    # Statistics
+    total_games = 0
+    correct_guesses = 0
+    wrong_guesses = 0
+    games_won = 0
+
     while play_again == "yes":
     #It repeats the game as long as the value of play_again is "yes".
 
         
         attempts = 3
+        total_games = total_games + 1
+        #total_games = total_games + 1 is used to increase the value of total_games by 1 every time a new game starts. It keeps track of the total number of games played by the user
+
 
         colors = ["red", "blue", "green", "yellow","pink", "white"]
 
@@ -48,16 +57,25 @@ def play_game():
             #if guess == secret_color:
             if check_guess(guess, secret_color): #new added after creating function   
                 print("Correct! You guessed the color!")
+                correct_guesses = correct_guesses + 1 #
+                games_won = games_won + 1   
+                #games_won = games_won + 1 is used to increase the value of games_won by 1 whenever the player correctly guesses the selected color and wins the game.
+
+
                 #score = score + 1 # used before function 
                 score = update_score(score) # used after function
                 break
     # if =is used to check whether a condition is true
     #== is operator  used to check whether two values are equal
 
+
+
+
             else: #else is used when the if condition is false
                 print("Wrong guess! Try again.") 
             #print("The correct color was:", secret_color)
-            attempts = attempts - 1
+                wrong_guesses = wrong_guesses + 1
+                attempts = attempts - 1
         #This statement decreases the value of attempts by 1 after a wrong guess.
             if attempts == 0:
                 print("No attempts left!")
@@ -76,7 +94,24 @@ def play_game():
             print("Let's play again!")
 
         else:
-            print("Thanks for playing!")    
+            print("Thanks for playing!") 
+
+            winning_percentage = (games_won / total_games) * 100
+
+
+            print("\n--- Game Statistics ---")
+            print("Total games played:", total_games)
+            print("Correct guesses:", correct_guesses)
+            print("Wrong guesses:", wrong_guesses)
+            print("Final score:", score)
+            print("Winning percentage:", winning_percentage)
+
+
+
+
+
+
+
 
 
 def get_guess():  #get_guess() is a function created to take the user's color guess as input.
